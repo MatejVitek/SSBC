@@ -21,7 +21,7 @@ from mpl_toolkits.axes_grid1.inset_locator import zoomed_inset_axes, mark_inset
 import numpy as np
 import pickle
 import re
-from segmentation_evaluation_compute import ATTR_EXP, Plot  # Plot is needed for pickle loading
+from compute import ATTR_EXP, Plot  # Plot is needed for pickle loading
 from evaluation.segmentation import *
 from evaluation import def_tick_format
 
