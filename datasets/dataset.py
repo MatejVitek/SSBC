@@ -9,7 +9,8 @@ import random
 import re
 from tqdm import tqdm
 
-from eyez.utils import IMG_EXTS
+
+IMG_EXTS = '.png', '.jpg', '.jpeg', '.bmp', '.gif', '.tif', '.tiff', '.ppm'
 
 
 class Direction(Enum):

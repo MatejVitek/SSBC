@@ -55,7 +55,7 @@ FIG_EXTS = ensure_iterable(FIG_EXTS, True)
 class Main:
 	def __init__(self, *args, **kw):
 		# Default values
-		root = EYEZ/'Segmentation/Results/Sclera/2020 SSBC'
+		root = Path('/path/to/Segmentation/Results/Sclera/2020 SSBC')
 		self.models = Path(args[0] if len(args) > 0 else kw.get('models', root/'Models'))
 		self.save = Path(args[1] if len(args) > 1 else kw.get('save', root))
 		self.plot = kw.get('plot', False)
@@ -85,7 +85,10 @@ class Main:
 
 		self._experiment1()
 		for attrs in ATTR_EXP:
-			self._experiment2(attrs)
+			try:
+				self._experiment2(attrs)
+			except ValueError as err:
+				print(f"Non-existant record for split across {attrs}s.")
 		self._experiment3()
 
 		if self.plot:

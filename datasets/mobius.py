@@ -1,7 +1,6 @@
 from enum import Enum
 
 from . import Dataset, Sample, Direction as Dir
-from eyez.utils import EYEZ
 
 
 class Phone(Enum):
@@ -48,7 +47,7 @@ class MOBIUS(Dataset):
 	sample_cls = MOBIUSSample
 
 	@classmethod
-	def from_dir(cls, dir, mask_dir=True, *args, extra_info_path=EYEZ/'MOBIUS/data.csv', **kw):
+	def from_dir(cls, dir, mask_dir=True, *args, extra_info_path='/path/to/MOBIUS/data.csv', **kw):
 		dataset = super().from_dir(dir, mask_dir, *args, **kw)
 		try:
 			extra_info = cls.read_extra_info(extra_info_path)
@@ -60,7 +59,7 @@ class MOBIUS(Dataset):
 		return dataset
 
 	@classmethod
-	def read_extra_info(cls, extra_info_path=EYEZ/'MOBIUS/data.csv'):
+	def read_extra_info(cls, extra_info_path='/path/to/MOBIUS/data.csv'):
 		with open(extra_info_path, 'r') as f:
 			# Skip header
 			f.readline()

@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
-# Always import these
 import os
 import sys
+sys.path.append(os.path.abspath(__file__))
 from pathlib import Path
 from ast import literal_eval
 from matej.collections import DotDict, ensure_iterable
@@ -10,31 +10,17 @@ from matej import make_module_callable
 from matej.parallel import tqdm_joblib
 import argparse
 from tkinter import *
-from tkinter.colorchooser import askcolor
 import tkinter.filedialog as filedialog
 from joblib.parallel import Parallel, delayed
 from tqdm import tqdm
-
-# If you need EYEZ
-ROOT = Path(__file__).absolute().parent.parent
-if str(ROOT) not in sys.path:
-	sys.path.append(str(ROOT))
-from eyez.utils import EYEZ
-
-# Import whatever else is needed
-from eyez.evaluation.segmentation import *
-from eyez.evaluation.plot import def_tick_format
 import itertools
-import matplotlib.cm
 from matplotlib.colors import hsv_to_rgb
-import matplotlib.pyplot as plt
-from matplotlib.ticker import FuncFormatter
 import numpy as np
 import pickle
 from PIL import Image
-from random import shuffle
 from scipy.interpolate import interp1d
 import sklearn.metrics as skmetrics
+from evaluation.segmentation import *
 
 
 # Constants
@@ -47,13 +33,12 @@ dict_product = lambda d: (dict(zip(d, x)) for x in itertools.product(*d.values()
 class Main:
 	def __init__(self, *args, **kw):
 		# Default values
-		root = EYEZ/'Segmentation/Results/Sclera/2020 SSBC'
+		root = Path('/path/to/Segmentation/Results/Sclera/2020 SSBC')
 		self.models = Path(args[0] if len(args) > 0 else kw.get('root', root/'Models'))
 		self.gt = Path(args[1] if len(args) > 1 else kw.get('gt', root/'GT'))
 		self.resize = kw.get('resize', (480, 360))
 		self.dataset = kw.get('dataset', 'MOBIUS')
 		self.k = kw.get('k', 5)
-		self.reread = kw.get('reread', True)
 
 		# Extra keyword arguments
 		self.extra = DotDict(**kw)
@@ -70,13 +55,13 @@ class Main:
 		self.threshold = np.linspace(0, 1, self.extra.get('interp', self.extra.get('interp_points', 1000)))
 
 		if self.dataset.lower() == 'mobius':
-			from eyez.data.sets import MOBIUS
+			from datasets import MOBIUS
 			dataset = MOBIUS
 		elif self.dataset.lower() == 'sbvpi':
-			from eyez.data.sets import SBVPI
+			from datasets import SBVPI
 			dataset = SBVPI
 		else:
-			from eyez.data.sets import Dataset
+			from datasets import Dataset
 			dataset = Dataset
 
 		dataset = dataset.from_dir(self.gt, mask_dir=None)
@@ -110,7 +95,7 @@ class Main:
 				for current_exp in exp_attr_values
 				for current_values in dict_product(current_exp)
 			}
-			all_names = ['Overall'] + attr_experiments
+			all_names = ['Overall'] + list(attr_experiments)
 			if not self.extra.get('overwrite', False) and all((self._model/f'Pickles/{name}.pkl').is_file() for name in all_names):
 				print(f"All pickles already exist, skipping {self._model.name}")
 				continue
@@ -264,7 +249,6 @@ class Main:
 		ap.add_argument('-d', '--dataset', type=str.lower, choices=('mobius', 'sbvpi', 'none'), help="dataset file naming protocol used")
 		ap.add_argument('-k', type=int, help="number of folds to perform")
 		ap.add_argument('-r', '--resize', type=int, nargs=2, help="width and height to resize the images to")
-		ap.add_argument('--reread', action='store_true', help="reread predictions each fold (takes longer but uses less memory)")
 		ap.parse_known_args(namespace=self)
 
 		ap = argparse.ArgumentParser(description="Extra keyword arguments.")
@@ -293,8 +277,8 @@ class Plot:
 		self.f1_point = f1_point
 		self.bin_point = bin_point
 
-	@classmethod
-	def mean_and_std(cls, plots, interp=1000):
+	@staticmethod
+	def mean_and_std(plots, interp=1000):
 		try:
 			iter(interp)
 		except TypeError:

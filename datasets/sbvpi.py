@@ -1,5 +1,4 @@
 from . import Dataset, Sample, Direction as Dir
-from eyez.utils import EYEZ
 
 
 class _ExtraInfo:
@@ -21,7 +20,7 @@ class SBVPI(Dataset):
 	sample_cls = SBVPISample
 
 	@classmethod
-	def from_dir(cls, dir, mask_dir='', *args, extra_info_path=EYEZ/'SBVPI/SBVPI_Gender_Age_Colour.txt', **kw):
+	def from_dir(cls, dir, mask_dir='', *args, extra_info_path='/path/to/SBVPI/SBVPI_Gender_Age_Colour.txt', **kw):
 		dataset = super().from_dir(dir, mask_dir, *args, **kw)
 		try:
 			extra_info = cls.read_extra_info(extra_info_path)
@@ -33,7 +32,7 @@ class SBVPI(Dataset):
 		return dataset
 
 	@classmethod
-	def read_extra_info(cls, extra_info_path=EYEZ/'SBVPI/SBVPI_Gender_Age_Colour.txt'):
+	def read_extra_info(cls, extra_info_path='/path/to/SBVPI/SBVPI_Gender_Age_Colour.txt'):
 		with open(extra_info_path, 'r') as f:
 			return {
 				(id + 1 + mirror_offset): _ExtraInfo(*line.split())
