@@ -49,3 +49,6 @@ The plotting and quantative evaluation is handled by `plot.py`. This script take
 The directory `/path/to/model/results/` should contain a subdirectory for each of your segmentation model(s). This subdirectory should contain the folder `Pickles` where the `.pkl` files produced by `compute.py` are located. This tree structure will be produced automatically if you use the same `/path/to/model/results/` for both scripts, but should be respected if you decide to include pickles from other models (such as the pickles of existing submitted models available on the [benchmarking site](https://sclera.fri.uni-lj.si/benchmarking.html#code)).
 
 The plots and quantative evaluations will be saved to `/path/to/save/to`. We also provide an example convenience `latexify.py` script that turns the text files of the quantative evaluations into LaTeX-style table entries, however the output of this script will likely need to be adapted for your needs depending on your LaTeX document.
+
+# Adapting the code for your own experiments and datasets
+**TODO**
