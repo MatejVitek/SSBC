@@ -2,10 +2,18 @@
 This code was used to produce the evaluation results for the paper "SSBC 2020: Sclera Segmentation and Benchmarking Competition in the Mobile Environment".
 
 # Requirements
-For the installation process and required libraries, please see the instructions at our [Sclera website](https://sclera.fri.uni-lj.si/code.html#ssbc).
+Our [utility libraries](https://sclera.fri.uni-lj.si/code.html#Libraries) are required to make this project work. The additional required python packages are:
+
+	joblib
+	matplotlib
+	numpy
+	pillow
+	scikit-learn
+	scipy
+	tqdm
 
 # Running the code
-This project is a stripped-down version of [our Toolbox](https://sclera.fri.uni-lj.si/code.html#toolbox). The project's functionality is divided into two parts — computation (slow and memory-intensive) and plotting (fast and efficient).
+This project is a stripped-down version of [our Toolbox](https://sclera.fri.uni-lj.si/code.html#Toolbox). The project's functionality is divided into two parts — computation (slow and memory-intensive) and plotting (fast and efficient).
 
 ## Computation
 The computation part takes as input the sclera masks that are the result from your model(s) and the ground truth information. It computes the precision/recall/... information and saves it to `.pkl` files ('pickles'). All this is handled by the script `compute.py`. To run the script, use the following syntax:
@@ -46,7 +54,7 @@ The plotting and quantative evaluation is handled by `plot.py`. This script take
 
 	python plot.py "/path/to/model/results" "/path/to/save/to"
 
-The directory `/path/to/model/results/` should contain a subdirectory for each of your segmentation model(s). This subdirectory should contain the folder `Pickles` where the `.pkl` files produced by `compute.py` are located. This tree structure will be produced automatically if you use the same `/path/to/model/results/` for both scripts, but should be respected if you decide to include pickles from other models (such as the pickles of existing submitted models available on the [benchmarking site](https://sclera.fri.uni-lj.si/benchmarking.html#code)).
+The directory `/path/to/model/results/` should contain a subdirectory for each of your segmentation model(s). This subdirectory should contain the folder `Pickles` where the `.pkl` files produced by `compute.py` are located. This tree structure will be produced automatically if you use the same `/path/to/model/results/` for both scripts, but should be respected if you decide to include pickles from other models (such as the pickles of existing submitted models available on the [benchmarking site](https://sclera.fri.uni-lj.si/benchmarking.html#Code)).
 
 The plots and quantative evaluations will be saved to `/path/to/save/to`. We also provide an example convenience `latexify.py` script that turns the text files of the quantative evaluations into LaTeX-style table entries, however the output of this script will likely need to be adapted for your needs depending on your LaTeX document.
 
