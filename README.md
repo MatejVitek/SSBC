@@ -16,7 +16,7 @@ Our [utility libraries](https://sclera.fri.uni-lj.si/code.html#Libraries) are re
 This project is a stripped-down version of [our Toolbox](https://sclera.fri.uni-lj.si/code.html#Toolbox). The project's functionality is divided into two parts — computation (slow and memory-intensive) and plotting (fast and efficient).
 
 ## Computation
-The computation part takes as input the sclera masks that are the result from your model(s) and the ground truth information. It computes the precision/recall/... information and saves it to `.pkl` files ('pickles'). All this is handled by the script `compute.py`. To run the script, use the following syntax:
+The computation part takes as input the sclera masks that are the result from your model(s) and the ground truth information. It computes the precision/recall/... information and saves it to `.pkl` files ("pickles"). All this is handled by the script `compute.py`. To run the script, use the following syntax:
 
 	python compute.py "/path/to/model/results" "/path/to/ground/truth"
 
