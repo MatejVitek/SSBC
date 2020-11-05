@@ -22,7 +22,7 @@ The computation part takes as input the sclera masks that are the result from yo
 
 	python compute.py "/path/to/model/results" "/path/to/ground/truth"
 
-The directory `/path/to/model/results/` should contain a subdirectory for each of your segmentation model(s). If you are only computing results for a single segmentation model, use only one subdirectory. Inside each of these model subdirectories should be two folders: `Predictions` (which contains greyscale probabilistic sclera masks output by your model before thresholding) and `Binarised` (which contains the binary black & white sclera masks obtained after thresholding). See below for a sample tree structure with two models called Segmentor and Segmentator:
+The directory `/path/to/model/results/` should contain a subdirectory for each of your segmentation models. If you are only computing results for a single segmentation model, use only one subdirectory. Inside each of these model subdirectories should be two folders: `Predictions` (which contains greyscale probabilistic sclera masks output by your model before thresholding) and `Binarised` (which contains the binary black & white sclera masks obtained after thresholding). See below for a sample tree structure with two models called Segmentor and Segmentator:
 
 	/path/to/model/results/
 	│─── Segmentor/
