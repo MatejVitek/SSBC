@@ -15,7 +15,7 @@ Our [utility libraries](https://sclera.fri.uni-lj.si/code.html#Libraries) are re
 	tqdm
 
 # Running the code
-This project is a stripped-down version of [our Toolbox](https://sclera.fri.uni-lj.si/code.html#Toolbox). The project's functionality is divided into two parts — computation (slow and memory-intensive) and plotting (fast and efficient).
+This project is a stripped-down version of [our Toolbox](https://sclera.fri.uni-lj.si/code.html#Toolbox). The project's functionality is divided into two parts—computation (slow and memory-intensive) and plotting (fast and efficient).
 
 ## Computation
 The computation part takes as input the sclera masks output by your model(s), and the ground truth information. It computes the precision/recall/... information and saves it to `.pkl` files ("pickles"). All this is handled by the script `compute.py`. To run the script, use the following syntax:
@@ -49,7 +49,7 @@ Other arguments are not required, but can be useful. For a full list see the out
 When running the code on the MOBIUS and SBVPI datasets you may encounter the following warning:
 
 	Warning: Extra info file not found. Only information parsed from file names will be available.
-This is safe to ignore if you only wish to run the experiments included in the scripts on MOBIUS. If you wish to design your own experiments based on the subject attributes available in the datasets (age, gender, presence of lenses, eye conditions, etc. — see the [dataset descriptions](https://sclera.fri.uni-lj.si/datasets.html) for detailed information), you'll have to edit the `extra_info_path` argument of the `from_dir` method in the corresponding file (`datasets/mobius.py` or `datasets/sbvpi.py`) to point to the correct path of the subject information file (which you should have received with the dataset).
+This is safe to ignore if you only wish to run the experiments included in the scripts on MOBIUS. If you wish to design your own experiments based on the subject attributes available in the datasets (age, gender, presence of lenses, eye conditions, etc.—see the [dataset descriptions](https://sclera.fri.uni-lj.si/datasets.html) for detailed information), you'll have to edit the `extra_info_path` argument of the `from_dir` method in the corresponding file (`datasets/mobius.py` or `datasets/sbvpi.py`) to point to the correct path of the subject information file (which you should have received with the dataset).
 
 ## Plotting and evaluation
 The plotting and quantitative evaluation is handled by `plot.py`. This script takes as input the `.pkl` files produced by `compute.py` and creates and saves various different plot figures and textual quantitative evaluations. To run the script, use the following syntax:
@@ -71,7 +71,7 @@ The project currently contains experiments that look at overall model performanc
 The attribute-specific experiments in `_experiment2` are currently designed for the MOBIUS dataset, as they contain experiments related to different lighting conditions, phones, gaze directions, and even combining different lighting conditions and phones in a single experiment. **These experiments are not suited for SBVPI so if you wish to run this code on SBVPI, you will have to remove light- and phone-based experiments.** You can easily change what attribute-specific experiments should be run in `ATTR_EXP` in `compute.py`. For a full list of available attributes in MOBIUS/SBVPI see the `MOBIUSSample` (or `SBVPISample`) and `_ExtraInfo` classes in `datasets/mobius.py` and `datasets/sbvpi.py`. Note that using subject-specific attributes (`_ExtraInfo`) available in MOBIUS/SBVPI will also require you to correct the `extra_info_path` argument in the `from_dir` method in the corresponding file.
 
 ## New dataset
-If you are not interested in performance across different attributes (in which case you should of course make appropriate changes to `compute.py` and `plot.py` to not run `_experiment2` — see previous section for more info), the simplest way to adapt to a new dataset is to rename all your images (and corresponding ground truth and prediction masks) to purely numerical names (e.g. `1.png`, `2.png`, ...), then running `compute.py` with the argument `--dataset None`.
+If you are not interested in performance across different attributes (in which case you should of course make appropriate changes to `compute.py` and `plot.py` to not run `_experiment2`—see the previous section for more info), the simplest way to adapt to a new dataset is to rename all your images (and corresponding ground truth and prediction masks) to purely numerical names (e.g. `1.png`, `2.png`, ...), then running `compute.py` with the argument `--dataset None`.
 
 Otherwise you will have to define your own dataset file. For the sake of demonstration, let's assume your dataset is called COD (Cool Ocular Dataset). In the folder `datasets` you will have to create a new file called `cod.py`. You can look at `mobius.py` in the same directory to get a better idea of what this file is supposed to contain. The `cod.py` file should contain:
 
