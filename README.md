@@ -1,7 +1,7 @@
 # About
 This code was used to produce the evaluation results for the paper ["SSBC 2020: Sclera Segmentation and Benchmarking Competition in the Mobile Environment"](https://sclera.fri.uni-lj.si/publications.html#SSBC_2020).
 
-It is designed for experiments on the MOBIUS dataset, however it can be adapted to other datasets as well.
+It is designed for experiments on the [MOBIUS dataset](https://sclera.fri.uni-lj.si/datasets.html#MOBIUS), however it can be adapted to other datasets as well.
 
 # Requirements
 Our [utility libraries](https://sclera.fri.uni-lj.si/code.html#Libraries) are required to make this project work. The additional required python packages are:
