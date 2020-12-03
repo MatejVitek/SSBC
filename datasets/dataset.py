@@ -1,7 +1,7 @@
 from abc import ABC
 from collections import defaultdict
 from enum import Enum
-from matej.collections import shuffled
+from matej.collections import shuffle as shuffled
 import numpy as np
 import os
 from pathlib import Path
