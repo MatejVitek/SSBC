@@ -5,6 +5,9 @@
 !**/.vscode/launch.json
 !**/.vscode/tasks.json
 
+# SLURM files
+*.slurm
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
