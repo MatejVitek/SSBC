@@ -5,7 +5,7 @@ import sys
 sys.path.append(os.path.abspath(__file__))
 from pathlib import Path
 from ast import literal_eval
-from matej import make_module_callable
+from matej.callable import make_module_callable
 from matej.collections import DotDict, ensure_iterable
 import argparse
 from tkinter import *
